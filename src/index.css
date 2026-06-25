@@ -1,0 +1,44 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400..700;1,400..700&family=JetBrains+Mono:wght@400;500&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-display: "Playfair Display", Georgia, serif;
+  --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, monospace;
+  
+  --color-blush: #FFDDE8;
+  --color-ivory: #FFF9F5;
+  --color-rosegold: #B76E79;
+  --color-rosegold-light: #C98A94;
+  --color-charcoal: #2B2B2B;
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    color: var(--color-charcoal);
+    background-color: var(--color-ivory);
+  }
+}
+
+/* Keyframes for premium floating petals */
+@keyframes float-petal {
+  0% {
+    transform: translateY(-10vh) translateX(0) rotate(0deg);
+    opacity: 0;
+  }
+  10% {
+    opacity: 0.8;
+  }
+  90% {
+    opacity: 0.8;
+  }
+  100% {
+    transform: translateY(110vh) translateX(100px) rotate(360deg);
+    opacity: 0;
+  }
+}
+
+.animate-petal {
+  animation: float-petal linear infinite;
+}

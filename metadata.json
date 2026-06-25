@@ -1,0 +1,6 @@
+{
+  "name": "Zayelle Gifts",
+  "description": "A premium product showcase website for a personalized gifting business. Displays customizable products with starting prices and examples to encourage Instagram DM inquiries.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

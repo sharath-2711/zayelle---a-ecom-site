@@ -1,0 +1,50 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    
+    // Helper to check if user is the admin
+    function isAdmin() {
+      return request.auth != null && request.auth.token.email == 'admin@zayelle.gifts';
+    }
+
+    // Helper for products validation
+    function isValidProduct(data) {
+      return data.name is string && data.name.size() > 0
+        && data.description is string && data.description.size() > 0
+        && data.startingPrice is number && data.startingPrice >= 0
+        && data.imageUrl is string && data.imageUrl.size() > 0;
+    }
+
+    // Helper for reviews validation
+    function isValidReview(data) {
+      return data.customerName is string && data.customerName.size() > 0
+        && data.rating is number && data.rating >= 1 && data.rating <= 5
+        && data.comment is string && data.comment.size() > 0
+        && data.isApproved is bool;
+    }
+
+    // Helper for gallery validation
+    function isValidGalleryItem(data) {
+      return data.imageUrl is string && data.imageUrl.size() > 0;
+    }
+
+    match /products/{productId} {
+      allow read: if true;
+      allow create, update: if isAdmin() && isValidProduct(request.resource.data);
+      allow delete: if isAdmin();
+    }
+
+    match /reviews/{reviewId} {
+      allow read: if true;
+      allow create: if isValidReview(request.resource.data); // customers can submit reviews
+      allow update: if (isAdmin() && isValidReview(request.resource.data)) || (!isAdmin() && request.resource.data.isApproved == false); // public cannot approve their own review
+      allow delete: if isAdmin();
+    }
+
+    match /gallery/{galleryId} {
+      allow read: if true;
+      allow create, update: if isAdmin() && isValidGalleryItem(request.resource.data);
+      allow delete: if isAdmin();
+    }
+  }
+}

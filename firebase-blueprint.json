@@ -1,0 +1,134 @@
+{
+  "entities": {
+    "Product": {
+      "title": "Product",
+      "description": "A customizable gift product showcase item",
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique identifier of the product"
+        },
+        "name": {
+          "type": "string",
+          "description": "Name of the customizable product"
+        },
+        "description": {
+          "type": "string",
+          "description": "Brief elegant description of the product"
+        },
+        "startingPrice": {
+          "type": "number",
+          "description": "Starting price of the product in Rupees (₹)"
+        },
+        "imageUrl": {
+          "type": "string",
+          "description": "URL or Base64 data of the main product image"
+        },
+        "customizationOptions": {
+          "type": "string",
+          "description": "Comma-separated or text of what can be customized"
+        },
+        "examples": {
+          "type": "string",
+          "description": "Text describing customization examples"
+        },
+        "createdAt": {
+          "type": "string",
+          "description": "Creation ISO timestamp"
+        }
+      },
+      "required": [
+        "name",
+        "description",
+        "startingPrice",
+        "imageUrl"
+      ]
+    },
+    "Review": {
+      "title": "Review",
+      "description": "Customer testimonial and review",
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique identifier of the review"
+        },
+        "customerName": {
+          "type": "string",
+          "description": "Name of the customer writing the review"
+        },
+        "rating": {
+          "type": "number",
+          "description": "Rating out of 5 stars"
+        },
+        "comment": {
+          "type": "string",
+          "description": "Customer testimonial comment"
+        },
+        "imageUrl": {
+          "type": "string",
+          "description": "Optional customer or custom product photo"
+        },
+        "isApproved": {
+          "type": "boolean",
+          "description": "Whether the review is approved for display on the landing page"
+        },
+        "createdAt": {
+          "type": "string",
+          "description": "Creation ISO timestamp"
+        }
+      },
+      "required": [
+        "customerName",
+        "rating",
+        "comment",
+        "isApproved"
+      ]
+    },
+    "GalleryItem": {
+      "title": "GalleryItem",
+      "description": "Recent showcase or Instagram gallery items",
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique identifier of the gallery item"
+        },
+        "title": {
+          "type": "string",
+          "description": "Caption or title of the post"
+        },
+        "imageUrl": {
+          "type": "string",
+          "description": "Image URL or Base64 data of the post"
+        },
+        "likes": {
+          "type": "number",
+          "description": "Number of simulated or actual likes"
+        },
+        "createdAt": {
+          "type": "string",
+          "description": "Creation ISO timestamp"
+        }
+      },
+      "required": [
+        "imageUrl"
+      ]
+    }
+  },
+  "firestore": {
+    "/products/{productId}": {
+      "schema": "Product",
+      "description": "Customizable products list"
+    },
+    "/reviews/{reviewId}": {
+      "schema": "Review",
+      "description": "Customer reviews and testimonials"
+    },
+    "/gallery/{galleryId}": {
+      "schema": "GalleryItem",
+      "description": "Showcase and Instagram gallery images"
+    }
+  }
+}
